@@ -1,0 +1,67 @@
+<% layout('layouts/boilerplate')%>
+
+    <div class="row">
+        <div class="col-12 col-lg-6">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        Disease : <%= record.disease%>
+                    </h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Symptoms : <%= record.symptoms%>
+                    </li>
+                    <li class="list-group-item">Description : <%= record.description%>
+                    </li>
+                    <li class="list-group-item">Treatment : <%= record.treatment%>
+                    </li>
+                    <li class="list-group-item text-muted">Check-Up by : <%= record.author.username%>
+                    </li>
+                </ul>
+                <% if( currentUser && record.author.equals(currentUser._id)) {%>
+                    <div class="card-body">
+                        <a class="card-link btn btn-info" href="/records/<%=record._id%>/edit">Edit</a>
+                        <form class="d-inline" action="/records/<%=record._id%>?_method=DELETE" method="POST">
+                            <button class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                    <% } %>
+                        <div class="card-footer text-muted">
+                            3 days ago
+                        </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-6">
+            <h2>Forum</h2>
+            <% if(currentUser){ %>
+                <form action="/records/<%=record._id%>/forum" method="POST" class="mb-3 validated-form" novalidate>
+                    <div class="mb-3">
+                        <label class="form-label" for="body">Your Opinion</label>
+                        <textarea class="form-control" name="forum[body]" id="body" cols="30" rows="3"
+                            required></textarea>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <button class="btn btn-success">Submit</button>
+                </form>
+                <% } %>
+                    <% for(let forum of record.forum) { %>
+                        <div class="card mb-3 ">
+                            <div class="card-body">
+                                <p class="card-text">
+                                    <%= forum.body %>
+                                </p>
+                                <h6 class="card-subtitle mb-2 text-muted">By : <%= forum.author.username%>
+                                </h6>
+                                <% if( currentUser && forum.author.equals(currentUser._id)) {%>
+                                    <form action="/records/<%=record._id%>/forum/<%=forum._id%>?_method=DELETE"
+                                        method="POST">
+                                        <button class="btn btn-sm btn-danger">Delete</button>
+                                    </form>
+                                    <% } %>
+                            </div>
+                        </div>
+                        <% } %>
+        </div>
+    </div>

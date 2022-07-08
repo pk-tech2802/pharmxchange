@@ -1,0 +1,52 @@
+<% layout('layouts/boilerplate')%>
+    <div class="row">
+        <h1 class="text-center">Edit Record</h1>
+        <div class="col-md-6 offset-md-3">
+            <form action="/records/<%=record._id%>?_method=PUT" method="POST" novalidate class="validated-form">
+                <div class="mb-3">
+                    <label class="form-label" for="name">Name</label>
+                    <input class="form-control" type="text" id="name" name="record[name]" value=<%=record.name%>
+                    required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="disease">Disease</label>
+                    <input class="form-control" type="text" id="disease" name="record[disease]"
+                        value=<%=record.disease%> required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="symptoms">Symptoms</label>
+                    <input class="form-control" type="text" id="symptoms" name="record[symptoms]"
+                        value=<%=record.symptoms%> required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="description">Description</label>
+                    <textarea class="form-control" type="text" id="description" name="record[description]"
+                        required><%=record.description%></textarea>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="treatment">Treatment</label>
+                    <input class="form-control" type="text" id="treatment" name="record[treatment]"
+                        value=<%=record.treatment%> required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <button class="btn btn-success">Update Record</button>
+                </div>
+            </form>
+            <a href="/records/<%= record._id%>">Back To Record</a>
+        </div>
+    </div>

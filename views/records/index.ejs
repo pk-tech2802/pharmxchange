@@ -1,0 +1,28 @@
+<% layout('layouts/boilerplate')%>
+    <h1 class="my-4">All Records</h1>
+    <ul>
+        <% for (let record of records){%>
+            <div class="card mb-3">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                Patient's Name : <%= record.name %>
+                            </h5>
+                            <p class="card-text">
+                                Disease : <%= record.disease %>
+                            </p>
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    Symptoms : <%= record.symptoms%>
+                                </small>
+                            </p>
+                            <a class="btn btn-primary" href="/records/<%=record._id%>">View
+                                <%=record.name%>'s Record
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% }%>
+    </ul>
